@@ -1,10 +1,9 @@
 <?php
-    require "Orcamento.php";
-    require "CalculadoraDeImpostos.php";
-    require "Imposto.php";
-    require "ICMS.php";
-    require "ISS.php";
-    require "KCV.php";
+    function autoload($class) {
+        include $class.".php";
+    }
+
+    spl_autoload_register("autoload");
 
     $reforma = new Orcamento(500);
     $calculadora = new CalculadoraDeImpostos();
@@ -18,4 +17,8 @@
     echo "<br>";
 
     echo $calculadora->calcula($reforma, new KCV());
+
+    echo "<br>";
+    
+    echo $calculadora->calcula(new Orcamento(3500), new ICCC());
 ?>
